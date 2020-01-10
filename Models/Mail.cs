@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace EFProtocolDemo
 {
@@ -6,8 +7,8 @@ namespace EFProtocolDemo
     {
         [Key]
         public string ProtId { get; set; }
-        public string DataInvio { get; set; }
-        public string DataRicezione { get; set; }
+        public DateTime DataInvio { get; set; }
+        public DateTime DataRicezione { get; set; }
         public Tipo Tipo { get; set; }
         public string Mittente { get; set; }
         public string Destinatario { get; set; }
