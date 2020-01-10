@@ -1,0 +1,68 @@
+﻿@model EFProtocolDemo.Mail
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Mail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProtId" class="control-label"></label>
+                <input asp-for="ProtId" class="form-control" />
+                <span asp-validation-for="ProtId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataInvio" class="control-label"></label>
+                <input asp-for="DataInvio" class="form-control" />
+                <span asp-validation-for="DataInvio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataRicezione" class="control-label"></label>
+                <input asp-for="DataRicezione" class="form-control" />
+                <span asp-validation-for="DataRicezione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <select asp-for="Tipo" class="form-control"></select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mittente" class="control-label"></label>
+                <input asp-for="Mittente" class="form-control" />
+                <span asp-validation-for="Mittente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Destinatario" class="control-label"></label>
+                <input asp-for="Destinatario" class="form-control" />
+                <span asp-validation-for="Destinatario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Oggetto" class="control-label"></label>
+                <input asp-for="Oggetto" class="form-control" />
+                <span asp-validation-for="Oggetto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Allegati" class="control-label"></label>
+                <input asp-for="Allegati" class="form-control" />
+                <span asp-validation-for="Allegati" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

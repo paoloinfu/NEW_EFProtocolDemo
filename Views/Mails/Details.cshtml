@@ -1,0 +1,60 @@
+﻿@model EFProtocolDemo.Mail
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Mail</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataInvio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataInvio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataRicezione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataRicezione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mittente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mittente)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Destinatario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Destinatario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Oggetto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Oggetto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Allegati)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Allegati)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProtId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
