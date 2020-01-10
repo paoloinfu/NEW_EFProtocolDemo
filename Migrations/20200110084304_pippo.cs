@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace EFProtocolDemo.Migrations
 {
@@ -11,8 +12,8 @@ namespace EFProtocolDemo.Migrations
                 columns: table => new
                 {
                     ProtId = table.Column<string>(nullable: false),
-                    DataInvio = table.Column<string>(nullable: true),
-                    DataRicezione = table.Column<string>(nullable: true),
+                    DataInvio = table.Column<DateTime>(nullable: true),
+                    DataRicezione = table.Column<DateTime>(nullable: true),
                     Tipo = table.Column<int>(nullable: false),
                     Mittente = table.Column<string>(nullable: true),
                     Destinatario = table.Column<string>(nullable: true),
