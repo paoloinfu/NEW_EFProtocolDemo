@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace EFProtocolDemo.Models.Repositories.Abstractions
 {
-    public interface MailRepository: CrudRepository<Mail>
+    interface DomainUnitOfWork
     {
-
+        MailRepository MailRepository { get; set; }
+        public Task<IEnumerable<Mail>> FindAllMailAsync();
     }
 }
