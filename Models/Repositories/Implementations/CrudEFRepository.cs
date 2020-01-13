@@ -37,6 +37,7 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
 
         public T Insert(T toInsert)
         {
+
             ctx.Set<T>().Add(toInsert);
             return toInsert;
         }
@@ -51,5 +52,6 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
             ctx.Set<T>().Update(toUpdate);
             return true;
         }
+
     }
 }

@@ -4,14 +4,16 @@ using EFProtocolDemo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFProtocolDemo.Migrations
 {
     [DbContext(typeof(EFProtocolDemoContext))]
-    partial class EFProtocolDemoContextModelSnapshot : ModelSnapshot
+    [Migration("20200113093855_nullableType")]
+    partial class nullableType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

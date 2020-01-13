@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EFProtocolDemo.Models.Repositories.Abstractions
 {
-    interface CrudRepository<T> 
+    public interface CrudRepository<T> 
     {
         Task<T> FindByIdAsync(string id);
         Task<bool> DeleteAsync(string id);
@@ -13,6 +13,7 @@ namespace EFProtocolDemo.Models.Repositories.Abstractions
         Task<bool> UpdateAsync(string id, T toUpdate);
         IEnumerable<T> FindAll();
 
+        
     }
 }
 
