@@ -14,8 +14,14 @@ namespace EFProtocolDemo
         public string Destinatario { get; set; }
         public string Oggetto { get; set; }
         public int Allegati { get; set; }
-  
-        
+
+        public void GenerateId(int mailNumber)
+        {
+            var stringFirstLetter = Mittente.Substring(0, 1);
+            var stringDate = DataInvio.ToString("ddMMyyyyHHmm");
+            var stringId = mailNumber +"_"+ stringDate + stringFirstLetter;
+            ProtId = stringId;
+        }
     }
     public enum Tipo
     {
@@ -23,6 +29,8 @@ namespace EFProtocolDemo
         Uscita = 2,
         Interna = 3
     }
+
+
 
    
 

@@ -119,5 +119,6 @@ namespace EFProtocolDemo.Controllers
         {
             return _context.Mails.Any(e => e.ProtId == id);
         }
+
     }
 }

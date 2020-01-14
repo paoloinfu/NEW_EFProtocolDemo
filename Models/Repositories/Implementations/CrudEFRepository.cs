@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace EFProtocolDemo.Models.Repositories.Implementations
 {
     public class CrudEFRepository<T> : CrudRepository<T> where T : class
@@ -35,11 +36,22 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
            return await ctx.Set<T>().FindAsync(id);
         }
 
+       // public T GenerateId(string id)  PSEUDO CODICE
+        //{
+        //    int baseId = 0;
+        //    int precId = baseId++;
+        //    baseId = precId;
+        //    string protId;
+        //    protId = (precI++) + mittente.ToArray[0] + dataRicezione.ToString();
+        //}
+
         public T Insert(T toInsert)
         {
 
             ctx.Set<T>().Add(toInsert);
+            
             return toInsert;
+
         }
 
         public async Task<bool> UpdateAsync(string id, T toUpdate)
@@ -52,6 +64,8 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
             ctx.Set<T>().Update(toUpdate);
             return true;
         }
+
+
 
     }
 }

@@ -13,7 +13,6 @@ namespace EFProtocolDemo.Models.Repositories.Abstractions
         Task<bool> UpdateAsync(string id, T toUpdate);
         IEnumerable<T> FindAll();
 
-        
     }
 }
 

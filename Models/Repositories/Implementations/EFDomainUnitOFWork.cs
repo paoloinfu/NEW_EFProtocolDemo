@@ -9,17 +9,49 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
 {
     public class EFDomainUnitOFWork : DomainUnitOfWork
     {
-        private EFProtocolDemoContext ctx;
         public MailRepository MailRepository { get ; set; }
 
-        public EFDomainUnitOFWork(EFProtocolDemoContext ctx, MailRepository mailRepository)
+        public EFDomainUnitOFWork(MailRepository mailRepository)
         {
-            this.ctx = ctx;
-            this.MailRepository = mailRepository;
+            MailRepository = mailRepository;
         }
-        public async Task<IEnumerable<Mail>> FindAllMailAsync()
+            
+
+        public Task<Mail> FindByIdAsync(string id)
         {
-            return await MailRepository.FindAll().AsQueryable().ToListAsync();
+            return MailRepository.FindByIdAsync(id);
+        }
+
+        public Task<bool> DeleteAsync(string id)
+        {
+            return MailRepository.DeleteAsync(id);
+        }
+
+        public async Mail Insert(Mail toInsert)
+        {
+           var lastMail = await MailRepository.FindLast();
+            if (lastMail == null) 
+            {
+                toInsert.GenerateId(0);
+            }
+            else
+            {
+                var stringLastId = lastMail.ProtId.Substring(0, lastMail.ProtId.IndexOf("_"));
+                var lastId = Int32.Parse(stringLastId);
+                toInsert.GenerateId(lastId + 1);
+                
+            }
+           return  MailRepository.Insert(toInsert);
+        }
+
+        public Task<bool> UpdateAsync(string id, Mail toUpdate)
+        {
+            return MailRepository.UpdateAsync(id, toUpdate);
+        }
+
+        public Task<IEnumerable<Mail>> FindAll()
+        {
+            return MailRepository.FindAll();
         }
     }
 }
