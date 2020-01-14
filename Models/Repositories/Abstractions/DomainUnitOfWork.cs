@@ -10,8 +10,8 @@ namespace EFProtocolDemo.Models.Repositories.Abstractions
         MailRepository MailRepository { get; set; }
         Task<Mail> FindByIdAsync(string id);
         Task<bool> DeleteAsync(string id);
-        Mail Insert(Mail toInsert);
+        Task<Mail> Insert(Mail toInsert);
         Task<bool> UpdateAsync(string id, Mail toUpdate);
-        Task<IEnumerable<Mail>> FindAll();
+        Task<IEnumerable<Mail>> FindAllAsync();
     }
 }

@@ -27,7 +27,7 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
             return MailRepository.DeleteAsync(id);
         }
 
-        public async Mail Insert(Mail toInsert)
+        public async Task<Mail> Insert(Mail toInsert)
         {
            var lastMail = await MailRepository.FindLast();
             if (lastMail == null) 
@@ -39,7 +39,6 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
                 var stringLastId = lastMail.ProtId.Substring(0, lastMail.ProtId.IndexOf("_"));
                 var lastId = Int32.Parse(stringLastId);
                 toInsert.GenerateId(lastId + 1);
-                
             }
            return  MailRepository.Insert(toInsert);
         }
@@ -49,9 +48,9 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
             return MailRepository.UpdateAsync(id, toUpdate);
         }
 
-        public Task<IEnumerable<Mail>> FindAll()
+        public Task<IEnumerable<Mail>> FindAllAsync()
         {
-            return MailRepository.FindAll();
+            return MailRepository.FindAllAsync();
         }
     }
 }

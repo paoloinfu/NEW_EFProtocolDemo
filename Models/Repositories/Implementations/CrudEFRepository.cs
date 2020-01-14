@@ -36,15 +36,7 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
            return await ctx.Set<T>().FindAsync(id);
         }
 
-       // public T GenerateId(string id)  PSEUDO CODICE
-        //{
-        //    int baseId = 0;
-        //    int precId = baseId++;
-        //    baseId = precId;
-        //    string protId;
-        //    protId = (precI++) + mittente.ToArray[0] + dataRicezione.ToString();
-        //}
-
+     
         public T Insert(T toInsert)
         {
 

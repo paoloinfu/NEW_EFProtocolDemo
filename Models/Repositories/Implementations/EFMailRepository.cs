@@ -1,8 +1,10 @@
 ﻿using EFProtocolDemo.Models.Repositories.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace EFProtocolDemo.Models.Repositories.Implementations
 {
@@ -15,29 +17,60 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
             Ctx = ctx;
         }
 
-        public Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var mail = await Ctx.Mails.FindAsync(id);
+            if (mail == null)
+            {
+                return false; 
+            }
+            Ctx.Mails.Remove(mail);
+            await Ctx.SaveChangesAsync();
+            return true;   
         }
 
-        public Task<IEnumerable<Mail>> FindAll()
+        public async Task<IEnumerable<Mail>> FindAllAsync()
         {
-            throw new NotImplementedException();
+            return await Ctx.Mails.ToListAsync();
         }
 
-        public Task<Mail> FindByIdAsync(string id)
+        public async Task<Mail> FindByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var mail = await Ctx.Mails.FindAsync(id);
+
+            if (mail == null)
+            {
+                return mail;
+
+            }
+            return mail;
         }
 
-        public Mail Insert(Mail toInsert)
+        public async Mail Insert(Mail mail)
         {
-            throw new NotImplementedException();
+            Ctx.Mails.Add(mail);
+            try
+            {
+                await Ctx.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (MailExists(mail.ProtId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetMail", new { id = mail.ProtId }, mail);
         }
 
         public Task<bool> UpdateAsync(string id, Mail toUpdate)
         {
-            throw new NotImplementedException();
+           
         }
 
         public Task<Mail> FindLast() {

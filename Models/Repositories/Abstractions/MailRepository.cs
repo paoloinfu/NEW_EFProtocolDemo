@@ -12,7 +12,7 @@ namespace EFProtocolDemo.Models.Repositories.Abstractions
         Task<bool> DeleteAsync(string id);
         Mail Insert(Mail toInsert);
         Task<bool> UpdateAsync(string id, Mail toUpdate);
-        Task<IEnumerable<Mail>> FindAll();
+        Task<IEnumerable<Mail>> FindAllAsync();
 
         public Task<Mail> FindLast();
  
