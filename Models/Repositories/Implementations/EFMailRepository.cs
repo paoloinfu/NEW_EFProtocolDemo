@@ -38,9 +38,9 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
         {
             var mail = await Ctx.Mails.FindAsync(id);
 
-            if (mail == null)
+            if (mail.ProtId != id)
             {
-                return mail;
+                return null;
 
             }
             return mail;
@@ -73,8 +73,9 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
            
         }
 
-        public Task<Mail> FindLast() {
-            return null;
+        public async Task<Mail> FindLast() 
+        {
+           return Ctx.Mails.LastOrDefault<Mail>();           
         }
     }
 }

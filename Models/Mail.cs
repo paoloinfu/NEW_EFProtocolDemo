@@ -18,9 +18,21 @@ namespace EFProtocolDemo
         public void GenerateId(int mailNumber)
         {
             var stringFirstLetter = Mittente.Substring(0, 1);
-            var stringDate = DataInvio.ToString("ddMMyyyyHHmm");
-            var stringId = mailNumber +"_"+ stringDate + stringFirstLetter;
-            ProtId = stringId;
+            if (DataInvio != null)
+            {
+                var stringDate = DataInvio.ToString("ddMMyyyyHHmm");
+                var stringId = mailNumber + "_" + stringDate + stringFirstLetter;
+                ProtId = stringId;
+            }
+            else
+            {
+                var stringDate = DataRicezione?.ToString("ddMMyyyyHHmm");
+                var stringId = mailNumber + "_" + stringDate + stringFirstLetter;
+                ProtId = stringId;
+            }
+            //var stringDate = DataInvio.ToString("ddMMyyyyHHmm");
+            //var stringId = mailNumber +"_"+ stringDate + stringFirstLetter;
+            //ProtId = stringId;
         }
     }
     public enum Tipo
