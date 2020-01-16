@@ -8,6 +8,7 @@ namespace EFProtocolDemo.Models.Repositories.Abstractions
     public interface MailRepository
     {
         public EFProtocolDemoContext Ctx{ get; set; }
+
         Task<Mail> FindByIdAsync(string id);
         Task<bool> DeleteAsync(string id);
         Mail Insert(Mail toInsert);

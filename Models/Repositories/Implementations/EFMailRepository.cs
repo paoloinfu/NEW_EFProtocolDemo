@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 
 namespace EFProtocolDemo.Models.Repositories.Implementations
@@ -49,23 +50,7 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
         public async Mail Insert(Mail mail)
         {
             Ctx.Mails.Add(mail);
-            try
-            {
-                await Ctx.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (MailExists(mail.ProtId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetMail", new { id = mail.ProtId }, mail);
+            
         }
 
         public Task<bool> UpdateAsync(string id, Mail toUpdate)
@@ -73,9 +58,19 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
            
         }
 
-        public async Task<Mail> FindLast() 
-        {
-           return Ctx.Mails.LastOrDefault<Mail>();           
-        }
+        //public Task<Mail> FindLast()
+        //{
+        //    var mail = new Mail();
+        //    mail = "SELECT TOP(1) FROM Mails ORDER BY protId DESC";
+                            
+        //}
+
+        //public string FindLastId()
+        //{
+        //    //return Ctx.Mails.OrderByDescending(m => m.ProtId).Select(m => m.ProtId).Cast<Mail>();
+
+        //    return  Ctx.Mails.OrderByDescending(m => m.ProtId).ToString();                      
+        //}
+
     }
 }
