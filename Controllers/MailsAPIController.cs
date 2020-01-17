@@ -14,7 +14,7 @@ namespace EFProtocolDemo.Controllers
     [ApiController]
     public class MailsAPIController : ControllerBase
     {
-        private readonly EFDomainUnitOFWork _context;
+        public EFDomainUnitOFWork _context;
 
         public MailsAPIController(EFDomainUnitOFWork context)
         {

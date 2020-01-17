@@ -33,9 +33,9 @@ namespace EFProtocolDemo
                         .AllowAnyHeader();
             }));
             services.AddDbContext<EFProtocolDemoContext>();
-            services.AddTransient<DomainUnitOfWork, EFDomainUnitOFWork>();
             services.AddTransient<MailRepository, EFMailRepository>();
-           
+            services.AddTransient<DomainUnitOfWork, EFDomainUnitOFWork>();
+
             services.AddControllersWithViews();
         }
 
