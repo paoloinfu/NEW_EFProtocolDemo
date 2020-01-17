@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFProtocolDemo.Models.Repositories.Abstractions;
+using EFProtocolDemo.Models.Repositories.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +33,9 @@ namespace EFProtocolDemo
                         .AllowAnyHeader();
             }));
             services.AddDbContext<EFProtocolDemoContext>();
+            services.AddTransient<DomainUnitOfWork, EFDomainUnitOFWork>();
+            services.AddTransient<MailRepository, EFMailRepository>();
+           
             services.AddControllersWithViews();
         }
 
