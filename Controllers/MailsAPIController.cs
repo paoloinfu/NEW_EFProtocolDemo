@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EFProtocolDemo;
+using EFProtocolDemo.Models.Repositories.Implementations;
 
 namespace EFProtocolDemo.Controllers
 {
@@ -13,29 +14,29 @@ namespace EFProtocolDemo.Controllers
     [ApiController]
     public class MailsAPIController : ControllerBase
     {
-        private readonly EFProtocolDemoContext _context;
+        private readonly EFDomainUnitOFWork _context;
 
-        public MailsAPIController(EFProtocolDemoContext context)
+        public MailsAPIController(EFDomainUnitOFWork context)
         {
             _context = context;
         }
 
         // GET: api/MailsAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Mail>>> GetMails()
+        public async Task<IEnumerable<Mail>> GetMails()
         {
-            return await _context.Mails.ToListAsync();
+            return await _context.FindAllAsync();
         }
 
         // GET: api/MailsAPI/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Mail>> GetMail(string id)
+        public async Task<Mail> GetMail(string id)
         {
-            var mail = await _context.Mails.FindAsync(id);
+            var mail = await _context.FindByIdAsync(id);
 
             if (mail == null)
             {
-                return NotFound();
+                return null;
             }
 
             return mail;
@@ -45,79 +46,39 @@ namespace EFProtocolDemo.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMail(string id, Mail mail)
+        public async Task<Mail> PutMail(string id, Mail mail)
         {
             if (id != mail.ProtId)
             {
-                return BadRequest();
+                return null;
             }
 
-            _context.Entry(mail).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MailExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            await _context.UpdateAsync(id, mail);
+            return mail;
         }
 
         // POST: api/MailsAPI
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Mail>> PostMail(Mail mail)
+        public async Task<Mail> PostMail(Mail mail)
         {
-            _context.Mails.Add(mail);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (MailExists(mail.ProtId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetMail", new { id = mail.ProtId }, mail);
+            await _context.Insert(mail);
+            return mail;
         }
 
         // DELETE: api/MailsAPI/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Mail>> DeleteMail(string id)
+        public async Task<bool> DeleteMail(string id)
         {
-            var mail = await _context.Mails.FindAsync(id);
+            var mail = await _context.FindByIdAsync(id);
             if (mail == null)
             {
-                return NotFound();
+                return false;
             }
 
-            _context.Mails.Remove(mail);
-            await _context.SaveChangesAsync();
-
-            return mail;
-        }
-
-        private bool MailExists(string id)
-        {
-            return _context.Mails.Any(e => e.ProtId == id);
+            await _context.DeleteAsync(id);
+            return true;
         }
 
     }

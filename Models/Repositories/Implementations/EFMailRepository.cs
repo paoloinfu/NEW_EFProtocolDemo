@@ -47,22 +47,39 @@ namespace EFProtocolDemo.Models.Repositories.Implementations
             return mail;
         }
 
-        public async Mail Insert(Mail mail)
+        public Mail Insert(Mail mail)
         {
             Ctx.Mails.Add(mail);
+            Ctx.SaveChanges();
+            return mail;
+
             
         }
 
-        public Task<bool> UpdateAsync(string id, Mail toUpdate)
+        public async Task<bool> UpdateAsync(string id, Mail toUpdate)
         {
-           
+            var found = Ctx.Mails.FindAsync(id);
+            if (found == null)
+            {
+                return false;
+            }
+            Ctx.Set<Mail>().Update(toUpdate);
+            await Ctx.SaveChangesAsync();
+            return true;
+        }
+
+        public Task<Mail> FindLast()
+        {
+            
+            var lastMail = Ctx.Mails.OrderByDescending(m => m.ProtId).FirstOrDefaultAsync();
+            return lastMail;
         }
 
         //public Task<Mail> FindLast()
         //{
         //    var mail = new Mail();
         //    mail = "SELECT TOP(1) FROM Mails ORDER BY protId DESC";
-                            
+
         //}
 
         //public string FindLastId()
